@@ -1,0 +1,1486 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"ro",
+				"rotation"
+			],
+			[
+				"timer",
+				"import flash.events.TimerEvent;"
+			],
+			[
+				"bu",
+				"bulletSpread"
+			],
+			[
+				"_bul",
+				"_bulletSpread"
+			],
+			[
+				"br",
+				"_barrelLength"
+			],
+			[
+				"lo",
+				"lookAt"
+			],
+			[
+				"ad",
+				"addChild"
+			],
+			[
+				"mov",
+				"moveX"
+			],
+			[
+				"rot",
+				"rotate"
+			],
+			[
+				"cu",
+				"currentMousePos"
+			],
+			[
+				"swi",
+				"swipeArrowPosition"
+			],
+			[
+				"re",
+				"removeDots"
+			],
+			[
+				"ca",
+				"carTransition"
+			],
+			[
+				"swipe",
+				"swipeArrow"
+			],
+			[
+				"get",
+				"getChildAt"
+			],
+			[
+				"tar",
+				"targetFrame"
+			],
+			[
+				"di",
+				"import flash.display.DisplayObject;"
+			],
+			[
+				"Di",
+				"DisplayObject"
+			],
+			[
+				"imageLo",
+				"imagesLoader"
+			],
+			[
+				"im",
+				"ImagesLoader"
+			],
+			[
+				"even",
+				"import flash.events.EventDispatcher;"
+			],
+			[
+				"load",
+				"loadSource"
+			],
+			[
+				"ta",
+				"targetFrame"
+			],
+			[
+				"fil",
+				"filename"
+			],
+			[
+				"ar",
+				"swipeArrow"
+			],
+			[
+				"swip",
+				"swipeArrow"
+			],
+			[
+				"remove",
+				"removeChild"
+			],
+			[
+				"ev",
+				"Event"
+			],
+			[
+				"URL",
+				"import flash.net.URLRequest;"
+			],
+			[
+				"loa",
+				"import flash.display.Loader;"
+			],
+			[
+				"mouse",
+				"import flash.events.MouseEvent;"
+			],
+			[
+				"colo",
+				"ColourChangeScene"
+			],
+			[
+				"on",
+				"onComplete"
+			],
+			[
+				"co",
+				"console"
+			],
+			[
+				"add",
+				"addChild"
+			],
+			[
+				"Url",
+				"URLLoader"
+			],
+			[
+				"cur",
+				"currentTarget"
+			],
+			[
+				"loader",
+				"import flash.system.LoaderContext;"
+			],
+			[
+				"applica",
+				"import flash.system.ApplicationDomain;"
+			],
+			[
+				"scl",
+				"scaleX"
+			],
+			[
+				"vi",
+				"visibleDots"
+			],
+			[
+				"int",
+				"int"
+			],
+			[
+				"mSw",
+				"mSwipeArrow"
+			],
+			[
+				"sc",
+				"scaleX"
+			],
+			[
+				"saved",
+				"savedCar"
+			],
+			[
+				"sav",
+				"savedCar"
+			],
+			[
+				"to",
+				"totalFrames"
+			],
+			[
+				"for",
+				"for	for (…) {…}"
+			],
+			[
+				"as",
+				"assets"
+			],
+			[
+				"mous",
+				"mouseClip"
+			],
+			[
+				"curre",
+				"currentTarget"
+			],
+			[
+				"car",
+				"carColour"
+			],
+			[
+				"eve",
+				"eventMan"
+			],
+			[
+				"Mouse",
+				"import flash.events.MouseEvent;"
+			],
+			[
+				"x",
+				"x"
+			],
+			[
+				"ran",
+				"randomFrames"
+			],
+			[
+				"P",
+				"ParticleHolder"
+			],
+			[
+				"pl",
+				"platform"
+			],
+			[
+				"save",
+				"savedBrickPlatform"
+			],
+			[
+				"bric",
+				"brickAmount"
+			],
+			[
+				"ge",
+				"getRandomInt"
+			],
+			[
+				"bri",
+				"brickAmount"
+			],
+			[
+				"ju",
+				"jumpAmount"
+			],
+			[
+				"pla",
+				"playerPos1"
+			],
+			[
+				"le",
+				"leftBumpPoint"
+			],
+			[
+				"up",
+				"upBumpPoint"
+			],
+			[
+				"do",
+				"downBumpPoint"
+			],
+			[
+				"Twe",
+				"TweenLite"
+			],
+			[
+				"tween",
+				"import fl.transitions.Tween;"
+			],
+			[
+				"cl",
+				"clip"
+			],
+			[
+				"ex",
+				"ExternalInterface"
+			],
+			[
+				"ve",
+				"Velocity"
+			],
+			[
+				"Po",
+				"Point"
+			],
+			[
+				"plat",
+				"platform"
+			],
+			[
+				"Pl",
+				"Platform1"
+			],
+			[
+				"s",
+				"speed"
+			],
+			[
+				"a",
+				"array"
+			],
+			[
+				"play",
+				"playerPos"
+			],
+			[
+				"S",
+				"Shape"
+			],
+			[
+				"r",
+				"rectangle"
+			],
+			[
+				"remo",
+				"removePlatRect"
+			],
+			[
+				"SA",
+				"STAGE_HEIGHT"
+			],
+			[
+				"Ex",
+				"import flash.external.ExternalInterface;"
+			],
+			[
+				"g",
+				"generatePlatforms"
+			],
+			[
+				"ST",
+				"STAGE_WIDTH"
+			],
+			[
+				"ext",
+				"import flash.external.ExternalInterface;"
+			],
+			[
+				"In",
+				"InfiniteBackground"
+			],
+			[
+				"E",
+				"ExternalInterface"
+			],
+			[
+				"bg",
+				"bg1"
+			],
+			[
+				"charac",
+				"character"
+			],
+			[
+				"char",
+				"character"
+			],
+			[
+				"fun",
+				"function	new function"
+			],
+			[
+				"mar",
+				"margin-bottom"
+			],
+			[
+				"ma",
+				"margin"
+			],
+			[
+				"marg",
+				"margin-bottom"
+			],
+			[
+				"tex",
+				"text-decoration"
+			],
+			[
+				"fo",
+				"font-weight"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"blo",
+				"inline-block"
+			],
+			[
+				"inl",
+				"inline-block"
+			],
+			[
+				"bord",
+				"border-bottom"
+			],
+			[
+				"bac",
+				"background-color"
+			],
+			[
+				"margin",
+				"margin"
+			],
+			[
+				"fon",
+				"font-size"
+			],
+			[
+				"margin-",
+				"margin-right"
+			],
+			[
+				"draw",
+				"drawTiles"
+			],
+			[
+				"tile",
+				"tileInfo"
+			],
+			[
+				"til",
+				"tileInfo"
+			],
+			[
+				"map",
+				"mapLevel"
+			],
+			[
+				"la",
+				"layerName"
+			],
+			[
+				"Me",
+				"mediatorEvent"
+			],
+			[
+				"me",
+				"mediator"
+			],
+			[
+				"pre",
+				"prevX"
+			],
+			[
+				"st",
+				"staticBlockInfo"
+			],
+			[
+				"m",
+				"mediatorEvent"
+			],
+			[
+				"dra",
+				"drawTiles"
+			],
+			[
+				"layer",
+				"layer"
+			],
+			[
+				"dr",
+				"drawPlayer"
+			],
+			[
+				"has",
+				"hasTiles"
+			],
+			[
+				"curen",
+				"currentTime"
+			],
+			[
+				"cure",
+				"currentFrame"
+			],
+			[
+				"sa",
+				"savedAnimCounter"
+			],
+			[
+				"mvo",
+				"moveTimer"
+			],
+			[
+				"mo",
+				"moveTimer"
+			],
+			[
+				"sca",
+				"scaleY"
+			],
+			[
+				"sp",
+				"sprite"
+			],
+			[
+				"player",
+				"playerAnim"
+			],
+			[
+				"ac",
+				"action"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/Users/caubry/d/workspace/actionscript-project-template/src/com/company_name/project_name/States/Game.as",
+			"settings":
+			{
+				"buffer_size": 152,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/caubry/d/workspace/actionscript-project-template/!project_name!.sublime-project",
+			"settings":
+			{
+				"buffer_size": 715,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "build-config.xml",
+			"settings":
+			{
+				"buffer_size": 938,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "local_demo/index.html",
+			"settings":
+			{
+				"buffer_size": 10917,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/ActionScript/AS3.sublime-build",
+	"command_palette":
+	{
+		"height": 374.0,
+		"selected_items":
+		[
+			[
+				"sa",
+				"Project: Save As"
+			],
+			[
+				"save",
+				"Project: Save As"
+			],
+			[
+				"add",
+				"Project: Add Folder"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"packag",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"ANF: New File"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 561.0
+	},
+	"console":
+	{
+		"height": 126.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/caubry/d/workspace/actionscript-project-template/local_demo/index.html",
+		"/Users/caubry/d/workspace/Fused/fused.sublime-project",
+		"/Users/caubry/d/workspace/actionscript-project-template/src/com/company_name/project_name/Main.as",
+		"/Users/caubry/d/workspace/actionscript-project-template/src/com/company_name/project_name/States/Game.as",
+		"/Users/caubry/d/workspace/vhosts-conf/localhost/master-vhost.conf",
+		"/Users/caubry/d/workspace/vhosts-conf/README.md",
+		"/Users/caubry/d/workspace/vhosts-conf/hosts",
+		"/Users/caubry/d/workspace/vhosts-conf/__conf/bomberman-vhost.conf",
+		"/Users/caubry/d/workspace/fused/src/com/fused/States/Weapons/BulletHolder.as",
+		"/Users/caubry/d/workspace/fused/src/com/fused/States/Weapons/Bullets.as",
+		"/Users/caubry/d/workspace/fused/src/com/fused/States/Particles/Particle.as",
+		"/Users/caubry/d/workspace/Fused/save/Bullet.as",
+		"/Users/caubry/d/workspace/Fused/save/BulletHolder.as",
+		"/Users/caubry/d/workspace/fused/src/com/fused/States/Weapons/BulletsHolder.as",
+		"/Users/caubry/d/workspace/fused/src/com/fused/States/Protagonists/ProtagonistsBase.as",
+		"/Users/caubry/d/workspace/fused/src/com/fused/States/Protagonists/EnemiesContainer.as",
+		"/Users/caubry/d/workspace/fused/src/com/fused/States/Protagonists/Player.as",
+		"/Users/caubry/d/workspace/fused/src/com/fused/States/Particles/Bullet.as",
+		"/Users/caubry/d/workspace/Fused/src/com/fused/States/Particles/BulletHolder.as",
+		"/Users/caubry/d/workspace/Fused/src/com/fused/States/Protagonists/Bullets.as",
+		"/Users/caubry/Downloads/weapon-projectile-gun/Main.as",
+		"/Users/caubry/d/workspace/fused/src/com/fused/Setup/Camera.as",
+		"/Users/caubry/d/workspace/fused/src/com/fused/Helpers/Utils.as",
+		"/Users/caubry/d/workspace/fused/Fused.as3proj",
+		"/Users/caubry/d/workspace/cyberpunk/cyberpunk.sublime-project",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/interactions/interaction_6/bin/car_images/rename_images.sh",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/interactions/interaction_6/bin/car_images/replace_frames.sh",
+		"/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/lib/common_src/com/oliv/domino/MouseAnimator.as",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/interactions/interaction_6/src/com/oliv/domino/interaction/ColourChangeScene.as",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/interactions/interaction_6/src/com/oliv/domino/interaction/ImagesLoader.as",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/interactions/interaction_6/src/com/oliv/domino/interaction/ColourChangeScene.as.mine",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/interactions/interaction_6/src/com/oliv/domino/interaction/ColourChangeScene.as.r94628",
+		"/Users/caubry/d/studios/tools/templates/interactive_as3/!template_title!.sublime-project",
+		"/Users/caubry/d/studios/tools/templates/linear/as3/template_title_as3.sublime-project",
+		"/Users/caubry/d/studios/tools/templates/linear/template_title.sublime-project",
+		"/Users/caubry/d/studios/tools/templates/linear_as3/template_title.sublime-project",
+		"/Users/caubry/d/studios/verizon/vz/2013/us/test/linear_as3/vz_2013_test_us_linear_as3.sublime-project",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/interactions/interaction_6/src/com/oliv/domino/interaction/CustomEvents.as",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/interactions/interaction_6/src/com/oliv/domino/interaction/Main.as",
+		"/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/lib/common_src/com/oliv/domino/Cta/CtaMessage.as",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/interactions/interaction_6/bin/loader.xml",
+		"/Users/caubry/d/studios/rb/harpic/whiteandshinebleach/au/shiny_things30_03764/interactive_as3/harpic_whiteandshinebleach_shiny_things30_03764_au.sublime-project",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/interactions/interaction_1/src/com/oliv/domino/interaction/Main.as",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/bin/oliv.xml",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/interactions/interaction_2/src/com/oliv/domino/interaction/Main.as",
+		"/Users/caubry/d/studios/verizon/vz/2013/us/halo33_04373_adchallenge/interactive_as3/src/com/telemetry/ads/Vz2013/Objects/ResponsiveVideo.as",
+		"/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/lib/dominolib/src/com/oliv/domino/InteractiveContent.as",
+		"/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/lib/common_src/com/oliv/domino/InteractionTimer.as",
+		"/Users/caubry/d/studios/rb/harpic/whiteandshinebleach/au/shiny_things30_03764/interactive_as3/src/com/telemetry/ads/HarpicWhiteandshinebleach/States/Swipe.as",
+		"/Users/caubry/d/studios/rb/harpic/whiteandshinebleach/au/shiny_things30_03764/interactive_as3/src/com/telemetry/ads/HarpicWhiteandshinebleach/States/Swipe copy.as",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/src/com/oliv/promo/Domino/DominoLoader.as",
+		"/Users/caubry/d/src/1019-InteractiveAdverts/tv2n_adlib/as3_creativelib/src/com/telemetry/Creative/System/Utility.as",
+		"/Users/caubry/d/workspace/imageCompression/imageCompression.sh",
+		"/Users/caubry/d/studios/rb/harpic/whiteandshinebleach/au/shiny_things30_03764/interactive_as3/build-config.xml",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/interactions/interaction_5/src/com/oliv/domino/interaction/Main.as",
+		"/Users/caubry/d/workspace/caubry.github.io/_data/projects.yml",
+		"/Users/caubry/d/workspace/Fused/README.md",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/interactions/interaction_3/src/com/oliv/domino/interaction/Footage.as",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/interactions/interaction_3/src/com/oliv/domino/interaction/Main.as",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/interactions/interaction_5/src/com/oliv/domino/interaction/MainTexture.as",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/src/com/oliv/promo/Domino/MasterDominoPlayer.as",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/src/com/oliv/promo/Main.as",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/bin/car_images/quick_bash.sh",
+		"/Users/caubry/d/studios/tools/image_tools/imageCompression.sh",
+		"/Users/caubry/d/studios/verizon/vz/2013/us/pillars30_DI_04111/interactive_as3/src/com/telemetry/ads/Vz2013/Objects/ResponsiveVideo.as",
+		"/Users/caubry/d/studios/verizon/vz/2013/us/pillars30_DI_04111/interactive_as3/src/com/telemetry/ads/Vz2013/Objects/PhoneScreen.as",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/interactions/interaction_2/bin/loader.xml",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/interactions/interaction_2/build-config.xml",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/interactions/interaction_5/bin/loader.xml",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/interactions/interaction_6/build-config.xml",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/interactions/interaction_1/bin/loader.xml",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/lib/common_src/com/oliv/domino/Cta/CtaMessage.as",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/interactions/interaction_2/demo.html",
+		"/Users/caubry/d/workspace/cyberpunk/src/com/cyberpunk/States/Platforms/PlatformBase.as",
+		"/Users/caubry/d/studios/rb/harpic/whiteandshinebleach/au/shiny_things30_03764/interactive_as3/src/com/telemetry/ads/HarpicWhiteandshinebleach/States/UserInterface.as",
+		"/Users/caubry/d/workspace/cyberpunk/src/com/cyberpunk/States/Platforms/PlatformContainer.as",
+		"/Users/caubry/d/studios/tools/creative_lib/as3/tween/r0002/com/telemetry/mp/tween/Tween.as",
+		"/Users/caubry/d/studios/rb/harpic/whiteandshinebleach/au/shiny_things30_03764/interactive_as3/src/com/telemetry/ads/HarpicWhiteandshinebleach/Main.as",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/interactions/interaction_1/build-config.xml",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/interactions/interaction_6/src/com/oliv/domino/interaction/ButtonBase.as",
+		"/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/lib/common_src/com/oliv/domino/AnimatedRollOverTimer.as",
+		"/Users/caubry/d/workspace/cyberpunk/src/com/cyberpunk/States/Platforms/IPlatform.as",
+		"/Users/caubry/Downloads/roofTops/Player.as",
+		"/Users/caubry/Downloads/roofTops/Part.as",
+		"/Users/caubry/d/studios/rb/harpic/whiteandshinebleach/au/shiny_things30_03764/interactive_as3/src/com/telemetry/ads/HarpicWhiteandshinebleach/States/ScreenScroller.as",
+		"/Users/caubry/d/workspace/cyberpunk/src/com/cyberpunk/States/CollisionManager.as",
+		"/Users/caubry/d/studios/rb/harpic/whiteandshinebleach/au/shiny_things30_03764/interactive_as3/src/com/telemetry/ads/HarpicWhiteandshinebleach/States/Outro.as",
+		"/Users/caubry/d/studios/rb/harpic/whiteandshinebleach/au/shiny_things30_03764/interactive_as3/src/com/telemetry/ads/HarpicWhiteandshinebleach/States/Interaction.as",
+		"/Users/caubry/d/workspace/cyberpunk/src/com/cyberpunk/States/Protagonists/Character.as",
+		"/Users/caubry/d/workspace/cyberpunk/src/com/cyberpunk/Game.as",
+		"/Users/caubry/d/workspace/cyberpunk/src/com/cyberpunk/Setup/Config.as",
+		"/Users/caubry/d/workspace/cyberpunk/src/com/cyberpunk/States/Platforms/Platform1.as",
+		"/Users/caubry/d/workspace/cyberpunk/src/com/cyberpunk/States/Platforms/Platform2.as",
+		"/Users/caubry/d/workspace/cyberpunk/src/com/cyberpunk/States/Platforms/Platform3.as",
+		"/Users/caubry/d/workspace/cyberpunk/build-config.xml",
+		"/Users/caubry/d/workspace/cyberpunk/src/com/cyberpunk/States/Protagonists/ProtagonistsBase.as",
+		"/Users/caubry/Downloads/roofTops/Plat.as",
+		"/Users/caubry/Downloads/roofTops/Main.as",
+		"/Users/caubry/Downloads/roofTops/Ship.as",
+		"/Users/caubry/Downloads/roofTops/Smoke.as",
+		"/Users/caubry/d/workspace/cyberpunk/src/com/cyberpunk/States/Particles/Particle.as",
+		"/Users/caubry/d/workspace/cyberpunk/src/com/cyberpunk/States/Particles/ParticleHolder.as",
+		"/Users/caubry/d/studios/rb/harpic/whiteandshinebleach/au/shiny_things30_03764/interactive_as3/src/com/telemetry/ads/HarpicWhiteandshinebleach/States/ParticleHolder.as",
+		"/Users/caubry/d/studios/rb/harpic/whiteandshinebleach/au/shiny_things30_03764/interactive_as3/src/com/telemetry/ads/HarpicWhiteandshinebleach/States/Particle.as",
+		"/Users/caubry/d/workspace/cyberpunk/lib/greensock/src/com/greensock/TweenLite.as",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/interactions/interaction_4/build-config.xml",
+		"/Users/caubry/d/workspace/oliv_promo_video/football/build-config.xml",
+		"/Users/caubry/d/workspace/cyberpunk/src/com/cyberpunk/States/Background/InfiniteScrolling.as",
+		"/Users/caubry/d/workspace/cyberpunk/src/com/cyberpunk/States/Protagonists/EnnemiesContainer.as",
+		"/Users/caubry/d/workspace/cyberpunk/src/com/cyberpunk/States/Protagonists/Ennemy1.as",
+		"/Users/caubry/d/workspace/cyberpunk/src/com/cyberpunk/States/Protagonists/Ennemy2.as",
+		"/Users/caubry/d/workspace/cyberpunk/src/com/cyberpunk/States/Protagonists/Ennemies3.as",
+		"/Users/caubry/d/workspace/cyberpunk/src/com/cyberpunk/States/Background/ScrollingLayer.as",
+		"/Users/caubry/Downloads/ScrollingBackground/src/layers/Decal.as",
+		"/Users/caubry/Downloads/ScrollingBackground/src/layers/StarField.as",
+		"/Users/caubry/Downloads/ScrollingBackground/src/layers/ScrollingLayer.as",
+		"/Users/caubry/Downloads/ScrollingBackground/src/Main.as",
+		"/Users/caubry/Downloads/ScrollingBackground/src/Preloader.as",
+		"/Users/caubry/d/workspace/cyberpunk/com/cyberpunk/States/Platforms/PlatformContainer.as",
+		"/Users/caubry/d/workspace/cyberpunk/com/cyberpunk/Game.as",
+		"/Users/caubry/d/workspace/cyberpunk/com/cyberpunk/States/Protagonists/Character.as",
+		"/Users/caubry/d/workspace/cyberpunk/com/cyberpunk/States/CollisionManager.as",
+		"/Users/caubry/d/workspace/cyberpunk/com/cyberpunk/States/Background/InfiniteScrolling.as",
+		"/Users/caubry/d/workspace/cyberpunk/com/cyberpunk/States/Background/ScrollingLayer.as",
+		"/Users/caubry/d/workspace/cyberpunk/com/cyberpunk/Setup/Config.as",
+		"/Users/caubry/d/workspace/cyberpunk/Main.as",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/build-config-dev.xml",
+		"/Users/caubry/d/studios/oliv/promo/2014/uk/oliv_website_promo_video1_04741/interactive_as3/test.html"
+	],
+	"find":
+	{
+		"height": 33.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"C:\\workspace\\octopress\\sass"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"enemyContainer",
+			"createEnemy",
+			"BulletHolder",
+			"bulletsHolder",
+			"Class",
+			"fire",
+			"asser",
+			"createEnemy",
+			"enemy",
+			"createEnemy",
+			"Class",
+			"rotate",
+			"enemies",
+			"savedCheckedEnemy",
+			"create",
+			"_barrelLength",
+			"enemies",
+			"newArea",
+			"destroyBullet",
+			"createBullet",
+			"_isFiring",
+			"_isLoaded",
+			"_isFiring",
+			"createBullet",
+			"fire",
+			"updateBullets",
+			"reloadWeapon",
+			"reloadTimerHandler",
+			"_reloadSpeed",
+			"gravityCheckbox",
+			"bullets",
+			"_bullets",
+			"updateBullets",
+			"createBullet",
+			"_bulletSpeed",
+			"_endY",
+			"_bulletSpread",
+			"_barrelLength",
+			"_startX",
+			"_pcos",
+			"updateBullets",
+			"shoot",
+			"updateBullets",
+			"fire",
+			"createBullet",
+			"_bullets",
+			"updateBullets",
+			"updateRotation",
+			"_rotateSpeedMax",
+			"_trueRotation",
+			"getDegrees",
+			"fire",
+			"rotate",
+			"lookAt",
+			"cyberpunk",
+			"rotateCar",
+			"sceneUpdate",
+			"resetSwipeArrow",
+			"currentMousePos",
+			"assets",
+			"playInstruction",
+			"resetSwipeArrow",
+			"addDots",
+			"updateDots",
+			"white",
+			"canInteractionEnd",
+			"removeDots",
+			"resetSwipeArrow",
+			"isPlaying",
+			"playInstruction",
+			"showDots",
+			"sceneUpdate",
+			"showDots",
+			"sceneUpdate",
+			"checkForCarSpin",
+			"swipeArrow",
+			"sceneUpdate",
+			"updateDots",
+			"whiteDotsArray",
+			"playFLVVideo",
+			"interactionFinished",
+			"playFLVVideo",
+			"hasInteractionEnded",
+			"carTransition",
+			"carColour",
+			"_imagesLoader",
+			"rotateCar",
+			"showDots",
+			"sceneUpdate",
+			"playInstruction",
+			"showDots",
+			"sceneUpdate",
+			"hasInteracted",
+			"hide",
+			"updateDots",
+			"checkForCarSpin",
+			"dotVisible",
+			"showDots",
+			"sceneUpdate",
+			"update",
+			"rotateCar",
+			"swipeSpeed",
+			"distance",
+			"loader",
+			"remove",
+			"carLastFrame",
+			"lastFrame",
+			"remove",
+			"loadSource",
+			">>",
+			"update\nupdate",
+			"completeHandler",
+			"loadHighQualityImages",
+			"swipeArrow.",
+			"swipeArrow.y",
+			"removeChi",
+			"carHolder",
+			"loadHighQualityImages",
+			"removeHighQualityImage",
+			"rotateCar",
+			"removeHighQualityImage",
+			"highResImage",
+			"CustomEvents",
+			"canSwipe",
+			"imagesLoader",
+			"loadSour",
+			"loader",
+			"highImageLoaded"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"###",
+			"### <a name",
+			"<a name=$1></a>$2",
+			"currentFrame",
+			"game.mapLevel",
+			"config",
+			"utils.DESPICABLE_COLLISION",
+			"utils.POWER_UPS",
+			"utils.DESPICABLE_BLOCK",
+			"utils.STATIC_BLOCK",
+			"game.map.loadTiles",
+			"this.registeredEvent",
+			"gameElement",
+			"map",
+			"this",
+			"/"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": true,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/Users/caubry/d/workspace/actionscript-project-template/src/com/company_name/project_name/States/Game.as",
+					"settings":
+					{
+						"buffer_size": 152,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/ActionScript 3/ActionScript 3.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/Users/caubry/d/workspace/actionscript-project-template/!project_name!.sublime-project",
+					"settings":
+					{
+						"buffer_size": 715,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								180,
+								180
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "build-config.xml",
+					"settings":
+					{
+						"buffer_size": 938,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								258,
+								280
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/XML/XML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "local_demo/index.html",
+					"settings":
+					{
+						"buffer_size": 10917,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10893,
+								10893
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1070.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 21.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 419.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.markdown":
+	{
+		"height": 92.0
+	},
+	"replace":
+	{
+		"height": 38.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"animatedrollovertimer",
+				"common_src/com/oliv/domino/AnimatedRollOverTimer.as"
+			],
+			[
+				"interactivecontent",
+				"dominolib/src/com/oliv/domino/InteractiveContent.as"
+			],
+			[
+				"tweenlite",
+				"greensock/TweenLite.as"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"D:\\workspace\\bomberman\\bomberman.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 239.0,
+	"status_bar_visible": true
+}

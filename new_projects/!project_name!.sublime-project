@@ -1,0 +1,30 @@
+{
+	"folders":
+	[
+		{
+			"file_exclude_patterns":
+			[
+				"*.sublime-workspace"
+			],
+			"path": "/Users/caubry/d/workspace/actionscript-project-template/template"
+		}
+	],
+	"template":
+	{
+        "mxmlc":
+        {
+            "config-file":
+            [
+                "build-config.xml"
+            ]
+        },
+        "name": "!project_name!",
+        "run":
+        {
+            "mac": "open 'local_demo/index.html' -a '/Applications/Google Chrome.app'",
+            "windows": "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe local_demo\\index.html"
+        },
+		"height": "!project_height!",
+		"width": "!project_width!"
+	}
+}
