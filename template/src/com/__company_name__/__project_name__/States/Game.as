@@ -1,4 +1,4 @@
-package com.!company_name!.!project_name!.States
+package com.__company_name__.__project_name__.States
 {
     public class Game 
     {

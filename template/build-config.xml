@@ -4,19 +4,19 @@
 <flex-config>
   <target-player>11.0</target-player>
   <swf-version>11</swf-version>
-  <output>bin/!project_name!.swf</output>
+  <output>bin/__project_name__.swf</output>
   <static-link-runtime-shared-libraries>true</static-link-runtime-shared-libraries>
   <compiler>
     <source-path append="true">
       <path-element>src</path-element>
     </source-path>
     <include-libraries>
-      <library>!project_name!_assets.swc</library>
+      <library>__project_name___assets.swc</library>
     </include-libraries>
   </compiler>
   <use-network>false</use-network>
   <file-specs>
-    <path-element>src/com/!company_name!/!project_name!/Main.as</path-element>
+    <path-element>src/com/__company_name__/__project_name__/Main.as</path-element>
   </file-specs>
   <default-background-color>#FFFFFF</default-background-color>
   <default-frame-rate>25</default-frame-rate>

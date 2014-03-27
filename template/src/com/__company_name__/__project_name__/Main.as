@@ -1,6 +1,6 @@
-package com.!company_name!.!project_name!
+package com.__company_name__.__project_name__
 {
-	import com.!company_name!.!project_name!.States.Game;
+	import com.__company_name__.__project_name__.States.Game;
 	import flash.display.Sprite;
 	import flash.display.Stage;
 	import flash.events.Event;
