@@ -11,12 +11,12 @@ scriptusage="Usage: company{string} project{string} width{integer} height{intege
 
 if [ "$#" -ne 4 ]
 then
-# Four arguments are needed to execute the script
-echo -e "${red}$scriptusage${colourreset}";
-exit;
+    # Four arguments are needed to execute the script
+    echo -e "${red}$scriptusage${colourreset}";
+    exit;
 else
-# Positive integer
-numericalRegex='^[0-9]+$';
+    # Positive integer
+    numericalRegex='^[0-9]+$';
 
     for args in "$@"
     do
