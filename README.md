@@ -1,4 +1,5 @@
-# Create a quick ActionScript project ready to be used in SublimeText
+# Template
+## Create a quick ActionScript project ready to be used in SublimeText
 
 Run build_template.sh with four arguments:
 
