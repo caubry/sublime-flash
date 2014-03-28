@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pwd=`pwd`;
+pwd=`pwd -P`;
 # Colours for the script
 red=$(tput setaf 1);
 yellow=$(tput setaf 2);
@@ -57,8 +57,8 @@ REPLACE_LIST=(
 
 # New project destination to copy template
 # Currently added on the current directory
-PROJECT_DESTINATION="${pwd}/$PROJECT_NAME/";
-PROJECT_TEMPLATE="${pwd}/template/";
+PROJECT_DESTINATION="${pwd}/$PROJECT_NAME";
+PROJECT_TEMPLATE="${pwd}/template";
 
 # Copy content of template
 if ! [ -d "${PROJECT_DESTINATION}" ]
@@ -86,6 +86,7 @@ FLA_PATH=$(find "$PROJECT_DESTINATION" -type f \( -iname "*.fla" \));
 DOM_NAME="DOMDocument.xml";
 PUBLISH_NAME="PublishSettings.xml";
 BUILD_CONFIG=$(find "$PROJECT_DESTINATION" -type f \( -iname "build-config.xml" \));
+MAIN_PATH=$(find "$PROJECT_DESTINATION" -type f \( -iname "Main.as" \));
 
 # Extract DOMDocument.xml
 if ! [ -f "${DOM_NAME}" ]
@@ -112,4 +113,4 @@ grep -Irl "__project_name__" "$PUBLISH_NAME" | xargs sed -i "" 's/__project_name
 # Put back into fla
 zip -q -m "$FLA_PATH" "$PUBLISH_NAME" 2> /dev/null;
 
-mxmlc -load-config+="$BUILD_CONFIG" -source-path+="/Applications/Adobe Flash CS6/Common/Configuration/ActionScript 3.0/projects/Flash/src";
+mxmlc -load-config+="$BUILD_CONFIG" -file-specs "${MAIN_PATH}" -source-path+="/Applications/Adobe Flash CS6/Common/Configuration/ActionScript 3.0/projects/Flash/src";
