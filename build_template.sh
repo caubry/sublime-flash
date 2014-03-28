@@ -87,6 +87,7 @@ DOM_NAME="DOMDocument.xml";
 PUBLISH_NAME="PublishSettings.xml";
 BUILD_CONFIG=$(find "$PROJECT_DESTINATION" -type f \( -iname "build-config.xml" \));
 MAIN_PATH=$(find "$PROJECT_DESTINATION" -type f \( -iname "Main.as" \));
+DEMO_INDEX=$(find "$PROJECT_DESTINATION" -type f \( -iname "index.html" \));
 
 # Extract DOMDocument.xml
 if ! [ -f "${DOM_NAME}" ]
@@ -114,3 +115,5 @@ grep -Irl "__project_name__" "$PUBLISH_NAME" | xargs sed -i "" 's/__project_name
 zip -q -m "$FLA_PATH" "$PUBLISH_NAME" 2> /dev/null;
 
 mxmlc -load-config+="$BUILD_CONFIG" -file-specs "${MAIN_PATH}" -source-path+="/Applications/Adobe Flash CS6/Common/Configuration/ActionScript 3.0/projects/Flash/src";
+
+open "$DEMO_INDEX" -a '/Applications/Google Chrome.app';
