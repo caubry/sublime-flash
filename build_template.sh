@@ -283,6 +283,9 @@ function findFiles()
     BUILD_CONFIG=$(find "$PROJECT_DESTINATION" -type f \( -iname "build-config.xml" \));
     MAIN_PATH=$(find "$PROJECT_DESTINATION" -type f \( -iname "Main.as" \));
     DEMO_INDEX=$(find "$PROJECT_DESTINATION" -type f \( -iname "index.html" \));
+    DEFAULT_SETTINGS=$(find "${pwd}" -type f \( -iname "DefaultSettings.json" \));
+    
+    cp $DEFAULT_SETTINGS UserSettings.json
     USER_SETTINGS=$(find "${pwd}" -type f \( -iname "UserSettings.json" \));
 
     createFLA;
