@@ -62,32 +62,63 @@ REPLACE_LIST=(
 PROJECT_DESTINATION="${pwd}/$PROJECT_NAME";
 PROJECT_TEMPLATE="${pwd}/template";
 
+function installRenameCommand()
+{
+    brew install rename;
+
+    command -v rename >/dev/null 2>&1 || 
+    { 
+        echo "Something went horribly wrong and pngquant hasn't been installed! (╯°□°）╯︵ ┻━┻";
+        exit; 
+    }
+
+    echo -e "\n********************************** \n******* Installation done! ******* \n**********************************";
+    replaceList;
+}
+
+function checkRenameCommand()
+{
+    command -v rename >/dev/null 2>&1 || 
+    { 
+        echo -e >&2 "\n*******************\nrename command line hasn't been installed.\nThis library is needed to rename directories and files.\n*******************"; 
+        
+        while true; do
+            read -p "`echo $'\n> '`Do you wish to install this program (Y/N)? " yn
+            case $yn in
+                [Yy]* ) installRenameCommand; break;;
+                [Nn]* ) echo "End"; exit;;
+                * ) echo "Please answer Yes or No.";;
+            esac
+        done
+        exit; 
+    }
+}
+
 # Copy content of template
 if ! [ -d "${PROJECT_DESTINATION}" ]
 then
     cp -rf ${PROJECT_TEMPLATE} ${PROJECT_DESTINATION};
 fi
 
-for (( i=0; i<${#REPLACE_LIST[@]}; i=(i+2) ))
-do
-    FIND=${REPLACE_LIST[$i]};
-    REPLACE=${REPLACE_LIST[(i+1)]};
+function replaceList()
+{
+    for (( i=0; i<${#REPLACE_LIST[@]}; i=(i+2) ))
+    do
+        FIND=${REPLACE_LIST[$i]};
+        REPLACE=${REPLACE_LIST[(i+1)]};
 
-    # Rename directories
-    find "$PROJECT_DESTINATION" -type d \( -iname "*$FIND*" \) | xargs rename 's#'"$FIND"'#'"$REPLACE"'#g';
+        # Rename directories
+        find "$PROJECT_DESTINATION" -type d \( -iname "*$FIND*" \) | xargs rename 's#'"$FIND"'#'"$REPLACE"'#g';
 
-    # Rename in files
-    grep -Irl "$FIND" "$PROJECT_DESTINATION" | xargs sed -i "" 's#'"$FIND"'#'"$REPLACE"'#g';
+        # Rename in files
+        grep -Irl "$FIND" "$PROJECT_DESTINATION" | xargs sed -i "" 's#'"$FIND"'#'"$REPLACE"'#g';
 
-    # Rename files
-    find "$PROJECT_DESTINATION" -type f \( -iname "*$FIND*" \) | xargs rename 's#'"$FIND"'#'"$REPLACE"'#g';
-done
+        # Rename files
+        find "$PROJECT_DESTINATION" -type f \( -iname "*$FIND*" \) | xargs rename 's#'"$FIND"'#'"$REPLACE"'#g';
+    done
 
-FLA_PATH=$(find "$PROJECT_DESTINATION" -type f \( -iname "*.fla" \));
-BUILD_CONFIG=$(find "$PROJECT_DESTINATION" -type f \( -iname "build-config.xml" \));
-MAIN_PATH=$(find "$PROJECT_DESTINATION" -type f \( -iname "Main.as" \));
-DEMO_INDEX=$(find "$PROJECT_DESTINATION" -type f \( -iname "index.html" \));
-USER_SETTINGS=$(find "${pwd}" -type f \( -iname "UserSettings.json" \));
+    findFiles;
+}
 
 function createFLA()
 {
@@ -135,9 +166,20 @@ function replaceSettingPlaceholder()
     done
 }
 
+function parseJSON()
+{
+    # Use a JSON parser to retrieve values
+    AS_CLASSES_PATH=$(cat $USER_SETTINGS | jq '.path_to_as_classes');
+    DEFAULT_BROWSER_PATH=$(cat $USER_SETTINGS | jq '.path_to_browser');
+
+    # Replaces leading " with nothing, and trailing " with nothing too
+    AS_CLASSES_PATH=$(echo "$AS_CLASSES_PATH" | sed -e 's/^"//'  -e 's/"$//');
+    DEFAULT_BROWSER_PATH=$(echo "$DEFAULT_BROWSER_PATH" | sed -e 's/^"//'  -e 's/"$//');
+}
+
 function installJQCommand()
 {
-    brew install jq
+    brew install jq;
 
     command -v jq >/dev/null 2>&1 || 
     { 
@@ -146,15 +188,8 @@ function installJQCommand()
     }
 
     echo -e "\n********************************** \n******* Installation done! ******* \n********************************** \n";
-
-     # Use a JSON parser to retrieve values
-    AS_CLASSES_PATH=$(cat $USER_SETTINGS | jq '.path_to_as_classes');
-    DEFAULT_BROWSER_PATH=$(cat $USER_SETTINGS | jq '.path_to_browser');
-
-    # Replaces leading " with nothing, and trailing " with nothing too
-    AS_CLASSES_PATH=$(echo "$AS_CLASSES_PATH" | sed -e 's/^"//'  -e 's/"$//');
-    DEFAULT_BROWSER_PATH=$(echo "$DEFAULT_BROWSER_PATH" | sed -e 's/^"//'  -e 's/"$//');
-
+    
+    parseJSON;
     runMxmlc;
     launchIndex;
 }
@@ -163,7 +198,7 @@ function checkJQCommand()
 {
     command -v jq >/dev/null 2>&1 || 
     { 
-        echo -e >&2 "\njq command line hasn't been installed.\nThis library is needed to parse the JSON data.\nMore info can be found at: http://stedolan.github.io/jq/"; 
+        echo -e >&2 "\n*******************\njq command line hasn't been installed.\nThis library is needed to parse the JSON data.\nMore info can be found at: http://stedolan.github.io/jq/\n*******************"; 
         
         while true; do
             read -p "`echo $'\n> '`Do you wish to install this program (Y/N)? " yn
@@ -175,6 +210,8 @@ function checkJQCommand()
         done
         exit; 
     }
+
+    parseJSON;
 }
 
 function setUserDefaultSettings()
@@ -240,8 +277,21 @@ function launchIndex()
     open "$DEMO_INDEX" -a "$DEFAULT_BROWSER_PATH";
 }
 
-createFLA;
-changePublishSettings;
-setUserDefaultSettings;
-runMxmlc;
-launchIndex;
+function findFiles()
+{
+    FLA_PATH=$(find "$PROJECT_DESTINATION" -type f \( -iname "*.fla" \));
+    BUILD_CONFIG=$(find "$PROJECT_DESTINATION" -type f \( -iname "build-config.xml" \));
+    MAIN_PATH=$(find "$PROJECT_DESTINATION" -type f \( -iname "Main.as" \));
+    DEMO_INDEX=$(find "$PROJECT_DESTINATION" -type f \( -iname "index.html" \));
+    USER_SETTINGS=$(find "${pwd}" -type f \( -iname "UserSettings.json" \));
+
+    createFLA;
+    changePublishSettings;
+    setUserDefaultSettings;
+    runMxmlc;
+    launchIndex;
+}
+
+# rename command line tool is needed to rename directories and files
+checkRenameCommand;
+replaceList;
