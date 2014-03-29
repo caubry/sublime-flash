@@ -57,9 +57,6 @@ REPLACE_LIST=(
     "__project_height__" "$PROJECT_HEIGHT"
 );
 
-# New project destination to copy template
-# Currently added on the current directory
-PROJECT_DESTINATION="${pwd}/$PROJECT_NAME";
 PROJECT_TEMPLATE="${pwd}/template";
 
 function installRenameCommand()
@@ -93,12 +90,6 @@ function checkRenameCommand()
         exit; 
     }
 }
-
-# Copy content of template
-if ! [ -d "${PROJECT_DESTINATION}" ]
-then
-    cp -rf ${PROJECT_TEMPLATE} ${PROJECT_DESTINATION};
-fi
 
 function replaceList()
 {
@@ -149,7 +140,7 @@ function changePublishSettings()
         unzip -q "$FLA_PATH" "$PUBLISH_NAME" 2> /dev/null;
     fi  
 
-    grep -Irl "__project_name__" "$PUBLISH_NAME" | xargs sed -i "" 's/__project_name__/'"$PROJECT_NAME"'/';
+    grep -Irl "new_project" "$PUBLISH_NAME" | xargs sed -i "" 's/new_project/'"$PROJECT_NAME"'/';
 
     zip -qm "$FLA_PATH" "$PUBLISH_NAME" 2> /dev/null;
 }
@@ -168,11 +159,22 @@ function replaceSettingPlaceholder()
 
 function parseJSON()
 {
+    
     # Use a JSON parser to retrieve values
+    PROJECT_DESTINATION=$(cat $USER_SETTINGS | jq '.path_to_new_project');
     AS_CLASSES_PATH=$(cat $USER_SETTINGS | jq '.path_to_as_classes');
     DEFAULT_BROWSER_PATH=$(cat $USER_SETTINGS | jq '.path_to_browser');
 
     # Replaces leading " with nothing, and trailing " with nothing too
+    PROJECT_DESTINATION=$(echo "${PROJECT_DESTINATION}" | sed -e 's/^"//'  -e 's/"$//');
+    # Check for trailing slash at the end of the project destination
+    if ! [ "${PROJECT_DESTINATION:$i:1}" == "/" ]
+    then
+        # Add a trailing slash
+        PROJECT_DESTINATION=$PROJECT_DESTINATION"/";
+    fi
+
+    PROJECT_DESTINATION=${PROJECT_DESTINATION}$PROJECT_NAME;
     AS_CLASSES_PATH=$(echo "$AS_CLASSES_PATH" | sed -e 's/^"//'  -e 's/"$//');
     DEFAULT_BROWSER_PATH=$(echo "$DEFAULT_BROWSER_PATH" | sed -e 's/^"//'  -e 's/"$//');
 }
@@ -216,12 +218,50 @@ function checkJQCommand()
 
 function setUserDefaultSettings()
 {
+    DEFAULT_SETTINGS=$(find "${pwd}" -type f \( -iname "DefaultSettings.json" \));
+
+    if ! [ -f "UserSettings.json" ]
+    then
+        cp $DEFAULT_SETTINGS UserSettings.json
+    fi
+    
+    USER_SETTINGS=$(find "${pwd}" -type f \( -iname "UserSettings.json" \));
+
     # Check if placeholders exist
+    projectDestination=$(grep -Irl "__new_project_path__" "$USER_SETTINGS");
     asPlaceHolder=$(grep -Irl "__as_classes_path__" "$USER_SETTINGS");
     defaultBrowserPlaceHolder=$(grep -Irl "__default_browser_path__" "$USER_SETTINGS");
 
-    if ! [[ -z "$asPlaceHolder" || -z "$defaultBrowserPlaceHolder" ]]
+    if ! [[ -z "$asPlaceHolder" || -z "$defaultBrowserPlaceHolder" || -z "$projectDestination" ]]
     then
+        # New project destination to copy template
+        echo -ne "\nPlease enter the destination path of your new project: $cr";
+        read destinationPath;
+        PROJECT_DESTINATION="$destinationPath";
+
+        # Check for trailing slash at the end of the project destination
+        if ! [ "${PROJECT_DESTINATION:${#PROJECT_DESTINATION} - 1}" == "/" ]
+        then
+            # Add a trailing slash
+            PROJECT_DESTINATION=$PROJECT_DESTINATION"/";
+        fi
+
+        # Check if path exists
+        if [[ ! -d "$PROJECT_DESTINATION" ]]
+        then
+            # Exit script if path doesn't exist
+            echo "File "$PROJECT_DESTINATION" not found!";
+            exit;
+        fi
+        
+        PROJECT_DESTINATION=${PROJECT_DESTINATION}$PROJECT_NAME;
+
+        SETTINGS_REPLACE_LIST=(
+            "__new_project_path__" "$PROJECT_DESTINATION"
+        );
+
+        replaceSettingPlaceholder;
+
         # Ask path to the ActionScript folder
         echo -ne "\nPlease enter the path to your ActionScript Classes: $cr";
         read asPath;
@@ -289,18 +329,21 @@ function findFiles()
     BUILD_CONFIG=$(find "$PROJECT_DESTINATION" -type f \( -iname "build-config.xml" \));
     MAIN_PATH=$(find "$PROJECT_DESTINATION" -type f \( -iname "Main.as" \));
     DEMO_INDEX=$(find "$PROJECT_DESTINATION" -type f \( -iname "index.html" \));
-    DEFAULT_SETTINGS=$(find "${pwd}" -type f \( -iname "DefaultSettings.json" \));
-
-    cp $DEFAULT_SETTINGS UserSettings.json
-    USER_SETTINGS=$(find "${pwd}" -type f \( -iname "UserSettings.json" \));
 
     createFLA;
     changePublishSettings;
-    setUserDefaultSettings;
     runMxmlc;
     launchIndex;
 }
 
+setUserDefaultSettings;
 # rename command line tool is needed to rename directories and files
 checkRenameCommand;
+
+# Copy content of template
+if ! [ -d "${PROJECT_DESTINATION}" ]
+then
+    cp -rf ${PROJECT_TEMPLATE} ${PROJECT_DESTINATION};
+fi
+
 replaceList;

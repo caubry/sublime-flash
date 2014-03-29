@@ -44,7 +44,8 @@ The script uses brew to install two small libraries: rename and jq
 
 ## What's next?
 
-Clone the repository and start running the bash script: build_template.sh  
+Currently this script only works for Mac users.  
+If you are one of them just clone the repository and start running the bash script: build_template.sh  
 The script takes four arguments:
 > company name  
 > project name  
@@ -59,11 +60,34 @@ bash build_template.sh caubry new_project 640 360;
 ```
 
 The script creates a new folder located in the current directory, with the parsed arguments.  
-First time run, it will prompt you to enter the path to your ActionScript Classes.  
+First time run, it will ask for your prefered directory where your new project can be created.  
+Once set, you will be able to change this set location from your UserSettings.json.  
+Next, it will prompt you to enter the path to your ActionScript Classes.  
 Mine are located at: /Applications/Adobe Flash CS6/Common/Configuration/ActionScript 3.0/projects/Flash/src  
 So, I just need to paste this path such as:
+
 ```
 Please enter the path to your ActionScript Classes:
 > /Applications/Adobe Flash CS6/Common/Configuration/ActionScript 3.0/projects/Flash/src
 ```
 
+It will also ask for your prefered web browser: 
+
+```
+Please enter the path to your default browser:
+> /Applications/Google Chrome.app
+```
+
+If you don't have rename and jq libraries install, the script will ask you if you wish to install them through brew as a package manager.  
+Unfortunately, if you don't want to install them it will exit the script.  
+I might try to avoid using these libraies in the future, but for the time being you'll need them.
+
+And that's it!  
+You should now be able to see the pink text 'It works!' embedded in a SWF, displayed in your web browser page, with the dimemsions previously set.  
+The project is now ready to be used as you wish!
+
+## TODO
+
+- Translate an existing FlashDevelop project to SublimeText;
+- Create a bash script for Git Bash on Windows;
+- Stop the script for exiting when the user enters a wrong path.

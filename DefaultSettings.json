@@ -1,4 +1,5 @@
 {
+	"path_to_new_project": "__new_project_path__",
 	"path_to_as_classes": "__as_classes_path__",
 	"path_to_browser": "__default_browser_path__"
 }
