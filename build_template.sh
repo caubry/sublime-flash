@@ -268,6 +268,12 @@ function setUserDefaultSettings()
 
 function runMxmlc()
 {
+    command -v mxmlc >/dev/null 2>&1 || 
+    { 
+        echo -e >&2 "\n*******************\nmxmlc command line hasn't been installed.\nThis library is needed to compile the project.\n Please follow the README instructions. \n*******************"; 
+        exit; 
+    }
+
     mxmlc -load-config+="$BUILD_CONFIG" -file-specs "${MAIN_PATH}" -source-path+="${AS_CLASSES_PATH}";
 }
 
@@ -284,7 +290,7 @@ function findFiles()
     MAIN_PATH=$(find "$PROJECT_DESTINATION" -type f \( -iname "Main.as" \));
     DEMO_INDEX=$(find "$PROJECT_DESTINATION" -type f \( -iname "index.html" \));
     DEFAULT_SETTINGS=$(find "${pwd}" -type f \( -iname "DefaultSettings.json" \));
-    
+
     cp $DEFAULT_SETTINGS UserSettings.json
     USER_SETTINGS=$(find "${pwd}" -type f \( -iname "UserSettings.json" \));
 
