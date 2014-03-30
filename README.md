@@ -7,12 +7,12 @@ Because allowing to easily set the dimensions of a new project is cool.
 
 ## orly?
 Yes, really!  
-When running the bash script you will be able to customise the dimension of your new fresh project,
+When running the bash script you will be able to customise the dimensions of your new fresh project,
 set the company or username and the project name, ideal for your new namespace.
 It also keeps a track of your ActionScript Classes source folder and your prefered web browser, 
 so you won't have to set your preferences all the time. 
 
-## Prerequisite 
+## Prerequisites 
 ###1. Any version of Adobe Flash
 ###2. Flex SDK binary set in your $PATH
 
@@ -59,12 +59,18 @@ cd actionscript-project-template;
 bash build_template.sh caubry new_project 640 360;
 ```
 
-The script creates a new folder located in the current directory, with the parsed arguments.  
+The script creates a new folder located in the current directory, with the passed arguments.  
 First time run, it will ask for your prefered directory where your new project can be created.  
+
+```
+Please enter the destination path of your new project:
+> /d/workspace
+```
+
 Once set, you will be able to change this set location from your UserSettings.json.  
 Next, it will prompt you to enter the path to your ActionScript Classes.  
 Mine are located at: /Applications/Adobe Flash CS6/Common/Configuration/ActionScript 3.0/projects/Flash/src  
-So, I just need to paste this path such as:
+So, I just need to paste a this path, such as:
 
 ```
 Please enter the path to your ActionScript Classes:
@@ -78,7 +84,7 @@ Please enter the path to your default browser:
 > /Applications/Google Chrome.app
 ```
 
-If you don't have rename and jq libraries install, the script will ask you if you wish to install them through brew as a package manager.  
+If you don't have rename and jq libraries installed, the script will ask you if you wish to install them.  
 Unfortunately, if you don't want to install them it will exit the script.  
 I might try to avoid using these libraies in the future, but for the time being you'll need them.
 
