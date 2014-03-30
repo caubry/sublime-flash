@@ -45,7 +45,7 @@ The script uses brew to install two small libraries: rename and jq
 ## What's next?
 
 Currently this script only works for Mac users.  
-If you are one of them just clone the repository and start running the bash script: build_template.sh  
+If you are one of them just forks the repository and start running the bash script: build_template.sh  
 The script takes four arguments:
 > company name  
 > project name  
