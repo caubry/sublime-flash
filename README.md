@@ -55,8 +55,8 @@ The script takes four arguments:
 Example from command line:  
 
 ```
-cd actionscript-project-template;  
-bash build_template.sh caubry new_project 640 360;
+cd actionscript-project-template
+bash build_template.sh caubry new_project 640 360
 ```
 
 The script creates a new folder located in the current directory, with the passed arguments.  

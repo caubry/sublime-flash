@@ -107,8 +107,6 @@ function replaceList()
         # Rename files
         find "$PROJECT_DESTINATION" -type f \( -iname "*$FIND*" \) | xargs rename 's#'"$FIND"'#'"$REPLACE"'#g';
     done
-
-    findFiles;
 }
 
 function createFLA()
@@ -253,14 +251,14 @@ function setUserDefaultSettings()
             echo "File "$PROJECT_DESTINATION" not found!";
             exit;
         fi
-        
-        PROJECT_DESTINATION=${PROJECT_DESTINATION}$PROJECT_NAME;
 
         SETTINGS_REPLACE_LIST=(
             "__new_project_path__" "$PROJECT_DESTINATION"
         );
 
         replaceSettingPlaceholder;
+
+        PROJECT_DESTINATION=${PROJECT_DESTINATION}$PROJECT_NAME;
 
         # Ask path to the ActionScript folder
         echo -ne "\nPlease enter the path to your ActionScript Classes: $cr";
@@ -347,3 +345,10 @@ then
 fi
 
 replaceList;
+
+REPLACE_LIST=(
+    "__project_path__" "$PROJECT_DESTINATION"
+);
+
+replaceList;
+findFiles;
