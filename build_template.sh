@@ -348,6 +348,7 @@ replaceList;
 
 REPLACE_LIST=(
     "__project_path__" "$PROJECT_DESTINATION"
+    "__browser_path__" "$DEFAULT_BROWSER_PATH"
 );
 
 replaceList;
