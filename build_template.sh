@@ -120,9 +120,21 @@ function createFLA()
         unzip -q "$FLA_PATH" "$DOM_NAME" 2> /dev/null;
     fi
 
+    # To be changed by user data
+    FLASH_VERSION="";
+    # FLASH_VERSION="Adobe Flash Professional CS6";
+    CURRENT_PLATFORM="";
+    # CURRENT_PLATFORM="Macintosh";
+
     # Change the dimension of the fla
     grep -Irl "width" "$DOM_NAME" | xargs sed -i "" 's/width="640"/width="'"$PROJECT_WIDTH"'"/';
     grep -Irl "height" "$DOM_NAME" | xargs sed -i "" 's/height="360"/height="'"$PROJECT_HEIGHT"'"/';
+
+    # Change version creator info
+    grep -Irl "creatorInfo" "$DOM_NAME" | xargs sed -i "" 's/creatorInfo="Adobe Flash Professional CS6"/creatorInfo="'"$FLASH_VERSION"'"/';
+    
+    # Change platform
+    grep -Irl "platform" "$DOM_NAME" | xargs sed -i "" 's/platform="Macintosh"/platform="'"$CURRENT_PLATFORM"'"/';
 
     zip -qm "$FLA_PATH" "$DOM_NAME" 2> /dev/null;
 }
@@ -232,25 +244,26 @@ function setUserDefaultSettings()
 
     if ! [[ -z "$asPlaceHolder" || -z "$defaultBrowserPlaceHolder" || -z "$projectDestination" ]]
     then
-        # New project destination to copy template
-        echo -ne "\nPlease enter the destination path of your new project: $cr";
-        read destinationPath;
-        PROJECT_DESTINATION="$destinationPath";
-
-        # Check for trailing slash at the end of the project destination
-        if ! [ "${PROJECT_DESTINATION:${#PROJECT_DESTINATION} - 1}" == "/" ]
-        then
-            # Add a trailing slash
-            PROJECT_DESTINATION=$PROJECT_DESTINATION"/";
-        fi
-
         # Check if path exists
-        if [[ ! -d "$PROJECT_DESTINATION" ]]
-        then
-            # Exit script if path doesn't exist
-            echo "File "$PROJECT_DESTINATION" not found!";
-            exit;
-        fi
+        while [[ ! -d "$PROJECT_DESTINATION" || -z "$PROJECT_DESTINATION" ]]
+        do
+            if [[ ! -d "$PROJECT_DESTINATION" ]]
+            then
+                echo "${red}File "$PROJECT_DESTINATION" not found!${colourreset}";
+            fi
+
+            # New project destination to copy template
+            echo -ne "\nPlease enter the destination path of your new project: $cr";
+            read destinationPath;
+            PROJECT_DESTINATION="$destinationPath";
+
+            # Check for trailing slash at the end of the project destination
+            if ! [ "${PROJECT_DESTINATION:${#PROJECT_DESTINATION} - 1}" == "/" ]
+            then
+                # Add a trailing slash
+                PROJECT_DESTINATION=$PROJECT_DESTINATION"/";
+            fi
+        done
 
         SETTINGS_REPLACE_LIST=(
             "__new_project_path__" "$PROJECT_DESTINATION"
