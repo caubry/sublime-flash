@@ -1,33 +1,32 @@
-var utils    = require('./utils'),
-    readline = require('readline'),
-    fs       = require('fs'),
-    path     = require('path');
-
-var rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+var shell = require('shelljs/global'),
+    utils = require('./utils'),
+    fs    = require('fs'),
+    path  = require('path');
 
 // Arguments needed to run the script
 var scriptUsage = "Usage: company{string} project{string} width{integer} height{integer}";
 
 checkArguments();
-
-var companyName   = getUserArguments()[0],
-    projectName   = getUserArguments()[1],
-    projectWidth  = getUserArguments()[2],
-    projectHeight = getUserArguments()[3];
-
-var replaceList = {
-    __company_name__    : companyName,
-    __project_name__    : projectName,
-    __project_width__   : projectWidth,
-    __project_height__  : projectHeight
-};
-
-var projectTemplate = __dirname + "/template";
-
 setUserDefaultSettings();
+
+function checkArguments() {
+    if (getUserArguments().length < 4) {
+        echo(scriptUsage);
+        exit(1);
+    }
+    getUserArguments().forEach(function (val, index, array) {
+        
+        /* Current value as a string should be only true
+        for the first and second arguments OR
+        Current value as an integer should be only true
+        for the third and forth arguments */
+        if ((!(index === 0 || index === 1) && !utils.isInteger(val)) ||
+            (!(index === 2 || index === 3) && utils.isInteger(val))) {
+            echo(scriptUsage);
+            exit(1);
+        }
+    });
+}
 
 // Four arguments are needed to execute the script
 function getUserArguments() {
@@ -38,107 +37,106 @@ function getUserArguments() {
     return userArgs;
 }
 
-function checkArguments() {
-    if (getUserArguments().length < 4) {
-        console.log(scriptUsage);
-        process.exit();
-    }
-    getUserArguments().forEach(function (val, index, array) {
-        /*
-        Current value as a string should be only true
-        for the first and second arguments OR
-        Current value as an integer should be only true
-        for the third and forth arguments
-        */
-        if ((!(index === 0 || index === 1) && !utils.isInteger(val)) ||
-            (!(index === 2 || index === 3) && utils.isInteger(val))) {
-            console.log(scriptUsage);
-            process.exit();
-        }
-    });
-}
-
 function setUserDefaultSettings() {
-    var defaultSettingsDir = fs.readdirSync(__dirname),
-        index = defaultSettingsDir.indexOf('DefaultSettings.json'),
-        defaultSettingsPath = __dirname + path.sep + defaultSettingsDir[index],
-        userSettingsPath = __dirname + path.sep + 'UserSettings.json';
 
+    var defaultSettingsFile = find('DefaultSettings.json');
     var defaultSettingsJSON = {
         __new_project_path__      : 'Please enter the destination path of your new project: ',
         __as_classes_path__       : 'Please enter the path to your ActionScript Classes: ',
         __default_browser_path__  : 'Please enter the path to your default browser: '
     };
 
-    fs.exists(userSettingsPath, function(exists) {
-        // Do not override UserSettings.json 
-        if (exists === false) {
-            // Copy DefaultSettings into UserSettings
-            utils.copyFile(fs, defaultSettingsPath, userSettingsPath, function(err) {});
-            // Prompt preferences questions to user
-            var setting = Object.keys(defaultSettingsJSON);
-            setting.forEach(function(setting) {
-                askUserInput(
-                    defaultSettingsJSON[setting],
-                    function(answer) {
-                        changeFromUserInput(userSettingsPath, setting, answer);
-                    }
-                );
-            });
-            // askUserInput(
-            //     'Please enter the destination path of your new project: ',
-            //     function (answer) {
-            //         changeFromUserInput(userSettingsPath, defaultSettingJSON[0], answer);
-            //         askUserInput(
-            //             'Please enter the path to your ActionScript Classes: ',
-            //             function(answer) {
-            //                 changeFromUserInput(userSettingsPath, defaultSettingJSON[1],answer);
-            //                 askUserInput(
-            //                     'Please enter the path to your default browser: ',
-            //                     function(answer) {
-            //                         changeFromUserInput(userSettingsPath, defaultSettingJSON[2], answer);
-            //                     }
-            //                 );
-            //             }
-            //         );
-            //     }
-            // );
-        } else {
-            // Check for placeholder in file
-            // var smth = mydata.list[0]["points.bean.pointsBase"][0].time;
-        }
-    });
-}
+    var macrosKeySettings = [
+        'path_to_new_project',
+        'path_to_as_classes',
+        'path_to_browser'
+    ];
 
-function askUserInput(string, callback) {
-    rl.question(string, function(answer) {
-        fs.exists(answer, function(exists) {
-            if (exists === false) {
-                console.log('File ' + answer + 'not found!');
-                askUserInput(string, callback);
-            } else {
-                callback(answer);
+    if (!test('-f', 'UserSettings.json')) {
+        cp(defaultSettingsFile, 'UserSettings.json');
+        // Replace macros with user inputs.
+        // Replace defaultSettingsJSON key with user input
+    } else {
+        var userSettingsFile    = pwd() + path.sep + find('UserSettings.json');
+        var userPreferences     = [];
+
+        fs.readFile(userSettingsFile, 'utf8', function (err, data) {
+            if (err) {
+                echo('Error: ' + err);
+                return;
             }
+            data = JSON.parse(data);
+            
+            macrosKeySettings.forEach(function(key) {
+                userPreferences.push(data[key]);
+            });
+
+            echo(userPreferences);
         });
-    });
+    }
+
+
+    // var userSettingsFile = find('UserSettings.json');
+    // echo(userSettingsJSON);
+
+    // Check if macros exist in UserSettings.json
+    // for (var key in defaultSettingsJSON) {
+    //     if (! grep(key, userSettingsFile)) {
+    //         // If they don't use the current value
+    //         for(var attributename in userSettingsJSON){
+    //             // console.log(attributename+": "+userSettingsJSON[attributename]);
+    //         }
+    //     }
+    // }
+
+    // Replace macros in UserSettings.json file
+    // ls('*.js').forEach(function(file) {
+    //     sed('-i', 'BUILD_VERSION', 'v0.1.2', file);
+    //     sed('-i', /.*REMOVE_THIS_LINE.*\n/, '', file);
+    //     sed('-i', /.*REPLACE_LINE_WITH_MACRO.*\n/, cat('macro.js'), file);
+    // });
+
+    // for (var key in defaultSettingsJSON) {
+    //     sed('-i', key, 'poo', 'UserSettings.json');
+    // }
+    
+    // defaultSettingsJSON.forEach(function(userSettingsFile))) {
+    //     echo(userSettingsFile);
+    // }
+
+    // var defaultSettingsDir = fs.readdirSync(__dirname),
+        // index = defaultSettingsDir.indexOf('DefaultSettings.json'),
+        // defaultSettingsPath = __dirname + path.sep + defaultSettingsDir[index],
+        // userSettingsPath = __dirname + path.sep + 'UserSettings.json';
+
+  //   var defaultSettingsJSON = {
+  //       __new_project_path__      : 'Please enter the destination path of your new project: ',
+  //       __as_classes_path__       : 'Please enter the path to your ActionScript Classes: ',
+  //       __default_browser_path__  : 'Please enter the path to your default browser: '
+  //   };
+
+  //   if (userSettingsPath) {
+		// echo("dont exists");
+  //   }
+
+    // fs.exists(userSettingsPath, function(exists) {
+    //     // Do not override UserSettings.json 
+    //     if (exists === false) {
+    //         // Copy DefaultSettings into UserSettings
+    //         utils.copyFile(fs, defaultSettingsPath, userSettingsPath, function(err) {});
+    //         // Prompt preferences questions to user
+    //         var setting = Object.keys(defaultSettingsJSON);
+    //         setting.forEach(function(setting) {
+    //             askUserInput(
+    //                 defaultSettingsJSON[setting],
+    //                 function(answer) {
+    //                     changeFromUserInput(userSettingsPath, setting, answer);
+    //                 }
+    //             );
+    //         });
+    //     } else {
+    //         // Check for placeholder in file
+    //         // var smth = mydata.list[0]["points.bean.pointsBase"][0].time;
+    //     }
+    // });
 }
-
-function changeFromUserInput(path, find, replace) {
-    // Check if placeholders exist in UserSettings.json
-    fs.readFile(path, 'utf8', function (err, data) {
-        if (err) {
-            return console.log(err);
-        }
-        var result = data.replace(find, replace);
-        fs.writeFile(path, result, 'utf8', function (err) {
-            if (err) return console.log(err);
-        });
-    });
-}
-
-
-
-
-
-
-
