@@ -1,10 +1,35 @@
-var shell = require('shelljs/global'),
-    utils = require('./utils'),
-    fs    = require('fs'),
-    path  = require('path');
+var shell     = require('shelljs/global'),
+    utils     = require('./utils'),
+    readline  = require('readline'),
+    fs        = require('fs'),
+    path      = require('path');
+
+var rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
 
 // Arguments needed to run the script
-var scriptUsage = "Usage: company{string} project{string} width{integer} height{integer}";
+var scriptArguments = {
+    'company' : 'string',
+    'project' : 'string',
+    'width'   : 'integer',
+    'height'  : 'integer'
+};
+
+var scriptUsage =   "Usage: " + "company"   + "{" + scriptArguments.company     + "} " +
+                                "project"   + "{" + scriptArguments.project     + "} " +
+                                "width"     + "{" + scriptArguments.width       + "} " +
+                                "height"    + "{" + scriptArguments.height      + "} ";
+
+var userSettingsFile;
+
+var questionList    = [],
+    macroList       = [],
+    settingJSONkey  = [];
+
+var userPreferences = {};
+var projectDestination;
 
 checkArguments();
 setUserDefaultSettings();
@@ -26,6 +51,14 @@ function checkArguments() {
             exit(1);
         }
     });
+
+    var index = 0;
+
+    for(var key in scriptArguments) {
+        index++;
+        scriptArguments[key] = [];
+        scriptArguments[key].push(getUserArguments()[index - 1]);
+    }
 }
 
 // Four arguments are needed to execute the script
@@ -38,105 +71,117 @@ function getUserArguments() {
 }
 
 function setUserDefaultSettings() {
-
     var defaultSettingsFile = find('DefaultSettings.json');
-    var defaultSettingsJSON = {
-        __new_project_path__      : 'Please enter the destination path of your new project: ',
-        __as_classes_path__       : 'Please enter the path to your ActionScript Classes: ',
-        __default_browser_path__  : 'Please enter the path to your default browser: '
-    };
+    var defaultSettingsJSON = [
+        {
+            macro: '__new_project_path__',
+            question: 'Please enter the destination path of your new project: '
+        },
+        {
+            macro: '__as_classes_path__',
+            question: 'Please enter the path to your ActionScript Classes: ',
+        },
+        {
+            macro: '__default_browser_path__',
+            question: 'Please enter the path to your default browser: '
 
-    var macrosKeySettings = [
-        'path_to_new_project',
-        'path_to_as_classes',
-        'path_to_browser'
+        }
     ];
 
     if (!test('-f', 'UserSettings.json')) {
         cp(defaultSettingsFile, 'UserSettings.json');
-        // Replace macros with user inputs.
-        // Replace defaultSettingsJSON key with user input
-    } else {
-        var userSettingsFile    = pwd() + path.sep + find('UserSettings.json');
-        var userPreferences     = [];
-
-        fs.readFile(userSettingsFile, 'utf8', function (err, data) {
-            if (err) {
-                echo('Error: ' + err);
-                return;
-            }
-            data = JSON.parse(data);
-            
-            macrosKeySettings.forEach(function(key) {
-                userPreferences.push(data[key]);
-            });
-
-            echo(userPreferences);
-        });
     }
 
+    userSettingsFile = pwd() + path.sep + find('UserSettings.json');
 
-    // var userSettingsFile = find('UserSettings.json');
-    // echo(userSettingsJSON);
+    var settingsKeys     = [];
+    var index            = 0;
+    var canAskQuestion   = false;
 
-    // Check if macros exist in UserSettings.json
-    // for (var key in defaultSettingsJSON) {
-    //     if (! grep(key, userSettingsFile)) {
-    //         // If they don't use the current value
-    //         for(var attributename in userSettingsJSON){
-    //             // console.log(attributename+": "+userSettingsJSON[attributename]);
-    //         }
-    //     }
+    fs.readFile(userSettingsFile, 'utf8', function (err, data) {
+        if (err) {
+            echo('Error: ' + err);
+            return;
+        }
+        data = JSON.parse(data);
+
+        for(var attributename in data) {
+            settingsKeys.push(attributename);
+        }
+
+        defaultSettingsJSON.forEach(function(key) {
+            index++;
+            // Check if macros have been replaced
+            if (data[settingsKeys[index - 1]] === key.macro) {
+                // Replace macros with user input.
+                settingJSONkey.push(settingsKeys[index - 1]);
+                questionList.push(key.question);
+                macroList.push(key.macro);
+
+                if (!canAskQuestion) {
+                    askQuestion(function() {
+                        copyTemplate();
+                    });
+                    canAskQuestion = true;
+                }
+            } else {
+                // Save user preferences from the JSON data
+                userPreferences[settingsKeys[index - 1]] = [];
+                userPreferences[settingsKeys[index - 1]].push(data[settingsKeys[index - 1]]);
+
+                if (index > defaultSettingsJSON.length - 1) {
+                    // Copy template
+                    copyTemplate();
+                }
+            }
+        });
+    });
+}
+
+function askQuestion(callback) {
+    replaceSettingMacro(userSettingsFile, macroList.shift(), questionList.shift(), settingJSONkey.shift(), function() {
+        if (macroList.length < 1 || questionList.length < 1) {
+            callback();
+        } else {
+            askQuestion(callback);
+        }
+    });
+}
+
+function replaceSettingMacro(jsonFile, strFind, question, settingKey, callback) {
+    userPreferences[settingKey] = [];
+    askUserInput(question, function(strReplace) {
+        userPreferences[settingKey].push(strReplace);
+        sed('-i', strFind, strReplace, jsonFile);
+        callback();
+    });
+}
+
+function askUserInput(string, callback) {
+    rl.question(string, function(answer) {
+        fs.exists(answer, function(exists) {
+            if (exists === false) {
+                echo('File ' + answer + ' not found!');
+                askUserInput(string, callback);
+            } else {
+                callback(answer);
+            }
+        });
+    });
+}
+
+function copyTemplate() {
+    projectDestination = userPreferences.path_to_new_project[0] + path.sep + scriptArguments.project[0];
+    // projectTemplate = pwd() + path.sep + find('template/');
+
+    echo(projectTemplate);
+    // Check if the project directory exists
+    // if (!test('-d', projectDestination)) {
+    //     echo('NOPE')
     // }
-
-    // Replace macros in UserSettings.json file
-    // ls('*.js').forEach(function(file) {
-    //     sed('-i', 'BUILD_VERSION', 'v0.1.2', file);
-    //     sed('-i', /.*REMOVE_THIS_LINE.*\n/, '', file);
-    //     sed('-i', /.*REPLACE_LINE_WITH_MACRO.*\n/, cat('macro.js'), file);
-    // });
-
-    // for (var key in defaultSettingsJSON) {
-    //     sed('-i', key, 'poo', 'UserSettings.json');
-    // }
-    
-    // defaultSettingsJSON.forEach(function(userSettingsFile))) {
-    //     echo(userSettingsFile);
-    // }
-
-    // var defaultSettingsDir = fs.readdirSync(__dirname),
-        // index = defaultSettingsDir.indexOf('DefaultSettings.json'),
-        // defaultSettingsPath = __dirname + path.sep + defaultSettingsDir[index],
-        // userSettingsPath = __dirname + path.sep + 'UserSettings.json';
-
-  //   var defaultSettingsJSON = {
-  //       __new_project_path__      : 'Please enter the destination path of your new project: ',
-  //       __as_classes_path__       : 'Please enter the path to your ActionScript Classes: ',
-  //       __default_browser_path__  : 'Please enter the path to your default browser: '
-  //   };
-
-  //   if (userSettingsPath) {
-		// echo("dont exists");
-  //   }
-
-    // fs.exists(userSettingsPath, function(exists) {
-    //     // Do not override UserSettings.json 
-    //     if (exists === false) {
-    //         // Copy DefaultSettings into UserSettings
-    //         utils.copyFile(fs, defaultSettingsPath, userSettingsPath, function(err) {});
-    //         // Prompt preferences questions to user
-    //         var setting = Object.keys(defaultSettingsJSON);
-    //         setting.forEach(function(setting) {
-    //             askUserInput(
-    //                 defaultSettingsJSON[setting],
-    //                 function(answer) {
-    //                     changeFromUserInput(userSettingsPath, setting, answer);
-    //                 }
-    //             );
-    //         });
-    //     } else {
-    //         // Check for placeholder in file
-    //         // var smth = mydata.list[0]["points.bean.pointsBase"][0].time;
-    //     }
-    // });
+    // # Copy content of template
+    // if ! [ -d "${PROJECT_DESTINATION}" ]
+    // then
+    //     cp -rf ${PROJECT_TEMPLATE} ${PROJECT_DESTINATION};
+    // fi
 }
