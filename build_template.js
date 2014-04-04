@@ -17,19 +17,18 @@ var scriptArguments = {
     'height'  : 'integer'
 };
 
-var scriptUsage =   "Usage: " + "company"   + "{" + scriptArguments.company     + "} " +
-                                "project"   + "{" + scriptArguments.project     + "} " +
-                                "width"     + "{" + scriptArguments.width       + "} " +
-                                "height"    + "{" + scriptArguments.height      + "} ";
-
-var userSettingsFile;
+var scriptUsage =   "Usage: " + "company"   + "{" +   scriptArguments.company  + "} " +
+                                "project"   + "{" +   scriptArguments.project  + "} " +
+                                "width"     + "{" +   scriptArguments.width    + "} " +
+                                "height"    + "{" +   scriptArguments.height   + "} ";
+var userSettingsFile,
+    projectDestination;
 
 var questionList    = [],
     macroList       = [],
     settingJSONkey  = [];
 
 var userPreferences = {};
-var projectDestination;
 
 checkArguments();
 setUserDefaultSettings();
@@ -39,8 +38,10 @@ function checkArguments() {
         echo(scriptUsage);
         exit(1);
     }
+
     getUserArguments().forEach(function (val, index, array) {
-        
+        // TODO check against scriptArguments
+
         /* Current value as a string should be only true
         for the first and second arguments OR
         Current value as an integer should be only true
@@ -126,8 +127,14 @@ function setUserDefaultSettings() {
                 }
             } else {
                 // Save user preferences from the JSON data
+                var pathPreferences = data[settingsKeys[index - 1]];
+                // Check for end trailing slash
+                if (pathPreferences.slice(-1) != path.sep) {
+                    // Add a trailing slash
+                    pathPreferences = pathPreferences + path.sep;
+                }
                 userPreferences[settingsKeys[index - 1]] = [];
-                userPreferences[settingsKeys[index - 1]].push(data[settingsKeys[index - 1]]);
+                userPreferences[settingsKeys[index - 1]].push(pathPreferences);
 
                 if (index > defaultSettingsJSON.length - 1) {
                     // Copy template
@@ -151,6 +158,11 @@ function askQuestion(callback) {
 function replaceSettingMacro(jsonFile, strFind, question, settingKey, callback) {
     userPreferences[settingKey] = [];
     askUserInput(question, function(strReplace) {
+        // Check for end trailing slash
+        if (strReplace.slice(-1) != path.sep) {
+            // Add a trailing slash
+            strReplace = strReplace + path.sep;
+        }
         userPreferences[settingKey].push(strReplace);
         sed('-i', strFind, strReplace, jsonFile);
         callback();
@@ -171,17 +183,41 @@ function askUserInput(string, callback) {
 }
 
 function copyTemplate() {
-    projectDestination = userPreferences.path_to_new_project[0] + path.sep + scriptArguments.project[0];
-    // projectTemplate = pwd() + path.sep + find('template/');
+    var newProjectPath = userPreferences.path_to_new_project[0];
+    projectDestination = newProjectPath + scriptArguments.project[0];
+    projectTemplate    = pwd() + path.sep + 'template';
 
-    echo(projectTemplate);
     // Check if the project directory exists
-    // if (!test('-d', projectDestination)) {
-    //     echo('NOPE')
-    // }
-    // # Copy content of template
-    // if ! [ -d "${PROJECT_DESTINATION}" ]
-    // then
-    //     cp -rf ${PROJECT_TEMPLATE} ${PROJECT_DESTINATION};
-    // fi
+    // Exit script if project exists
+    if (!test('-d', projectDestination)) {
+        cp('-R', projectTemplate, newProjectPath);
+        mv(newProjectPath + 'template', newProjectPath + scriptArguments.project[0]);
+    } else {
+        echo('Project ' + scriptArguments.project[0] + ' already exists!');
+        rl.close();
+    }
+
+    replaceTemplateMacro();
+}
+
+function replaceTemplateMacro() {
+    for (var key in scriptArguments) {
+        echo(key);
+        echo(scriptArguments[key][0]);
+    }
+    // (( i=0; i<${#REPLACE_LIST[@]}; i=(i+2) ))
+    // do
+    //     FIND=${REPLACE_LIST[$i]};
+    //     REPLACE=${REPLACE_LIST[(i+1)]};
+
+    //     # Rename directories
+    //     find "$PROJECT_DESTINATION" -type d \( -iname "*$FIND*" \) | xargs rename 's#'"$FIND"'#'"$REPLACE"'#g';
+
+    //     # Rename in files
+    //     grep -Irl "$FIND" "$PROJECT_DESTINATION" | xargs sed -i "" 's#'"$FIND"'#'"$REPLACE"'#g';
+
+    //     # Rename files
+    //     find "$PROJECT_DESTINATION" -type f \( -iname "*$FIND*" \) | xargs rename 's#'"$FIND"'#'"$REPLACE"'#g';
+    // done
+
 }
