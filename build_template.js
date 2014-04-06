@@ -279,24 +279,35 @@ function renameInFiles(fileArray, callback) {
 
 function renameDirectories(dirArray, index, fileArray, callback) {
     var findStr = defaultMacro[index],
-        replaceStr = scriptArguments[index];
+        replaceStr = scriptArguments[index],
+        currentCound = 0;
 
     dirRenamed++;
 
     dirArray.forEach(function(val, i, arr) {
+        currentCound++;
         for (var key in findStr) {
             if (val.indexOf(".") < 0) {
                 var myReg = new RegExp(findStr[key], "g");
                 var newstr = val.replace(myReg, replaceStr[key][0]);
+                echo('wait');
                 if (newstr != val) {
                     if ((test('-d', val) && (!test('-d', newstr)))) {
                         renameFolder(val, newstr, function() {
                             checkForRenamedDir(dirArray, fileArray, function(newDirArray) {
-                                if (canRename(newstr)) {
+                                if (canRename()) {
                                     renameDirectories(newDirArray, dirRenamed, fileArray, callback);
+                                } else {
+                                    rl.close();
                                 }
                             });
                         });
+                    }
+                } else {
+                    if (currentCound > dirArray.length -1 && canRename()) {
+                        renameDirectories(dirArray, dirRenamed, fileArray, callback);
+                    } else {
+                        rl.close();
                     }
                 }
             }
@@ -304,10 +315,8 @@ function renameDirectories(dirArray, index, fileArray, callback) {
     });
 }
 
-function canRename(newstr) {
-    // newstr to check if exists in path
-    echo(dirRenamed)
-    if (dirRenamed < 2) {
+function canRename() {
+    if (dirRenamed < scriptArguments.length - 1) {
         return true;
     } else {
         return false;
@@ -325,7 +334,6 @@ function checkForRenamedDir(savedDir, fileArray, callback) {
 function renameFolder(val, newstr, callback) {
     fs.rename(val, newstr, function (err) {
         if (err) echo(err);
-        echo('Renamed');
         callback();
     });
 }
