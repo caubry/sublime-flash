@@ -2,7 +2,8 @@ var shell     = require('shelljs/global'),
     utils     = require('./utils'),
     readline  = require('readline'),
     fs        = require('fs'),
-    path      = require('path');
+    path      = require('path'),
+    rpl   = require('replace');
 
 var rl = readline.createInterface({
     input: process.stdin,
@@ -10,24 +11,38 @@ var rl = readline.createInterface({
 });
 
 // Arguments needed to run the script
-var scriptArguments = {
-    'company' : 'string',
-    'project' : 'string',
-    'width'   : 'integer',
-    'height'  : 'integer'
-};
+var scriptArguments = [
+    {'company'      : 'string'},
+    {'project'      : 'string'},
+    {'width'        : 'integer'},
+    {'height'       : 'integer'},
+    {'browser'      : 'string'},
+    {'projectPath'  : 'string'}
+];
 
-var scriptUsage =   "Usage: " + "company"   + "{" +   scriptArguments.company  + "} " +
-                                "project"   + "{" +   scriptArguments.project  + "} " +
-                                "width"     + "{" +   scriptArguments.width    + "} " +
-                                "height"    + "{" +   scriptArguments.height   + "} ";
+var defaultMacro = [
+    {'company'      : '__company_name__'},
+    {'project'      : '__project_name__'},
+    {'width'        : '__project_width__'},
+    {'height'       : '__project_height__'},
+    {'browser'      : '__browser_path__'},
+    {'projectPath'  : '__project_path__'}
+];
+
+var scriptUsage =   "Usage: " + "company"   + "{" +   scriptArguments[0].company  + "} " +
+                                "project"   + "{" +   scriptArguments[1].project  + "} " +
+                                "width"     + "{" +   scriptArguments[2].width    + "} " +
+                                "height"    + "{" +   scriptArguments[3].height   + "} ";
 var userSettingsFile,
-    projectDestination;
+    projectDestination,
+    projectTemplate,
+    previousMacro;
 
 var questionList    = [],
     macroList       = [],
     settingJSONkey  = [];
 
+// User preferences set in UserSettings.json
 var userPreferences = {};
 
 checkArguments();
@@ -40,26 +55,21 @@ function checkArguments() {
     }
 
     getUserArguments().forEach(function (val, index, array) {
-        // TODO check against scriptArguments
-
-        /* Current value as a string should be only true
-        for the first and second arguments OR
-        Current value as an integer should be only true
-        for the third and forth arguments */
-        if ((!(index === 0 || index === 1) && !utils.isInteger(val)) ||
-            (!(index === 2 || index === 3) && utils.isInteger(val))) {
-            echo(scriptUsage);
-            exit(1);
-        }
+        scriptArguments.forEach(function (v, i, argsArray) {
+            for (var value in argsArray[index]) {
+                if ((argsArray[index][value] === 'integer') && !utils.isInteger(val)) {
+                    echo(scriptUsage);
+                    exit(1);
+                } else if ((argsArray[index][value] === 'string') && utils.isInteger(val)) {
+                    echo(scriptUsage);
+                    exit(1);
+                }
+                // Replace value of array with user input
+                argsArray[index][value] = [];
+                argsArray[index][value].push(array[index]);
+            }
+        });
     });
-
-    var index = 0;
-
-    for(var key in scriptArguments) {
-        index++;
-        scriptArguments[key] = [];
-        scriptArguments[key].push(getUserArguments()[index - 1]);
-    }
 }
 
 // Four arguments are needed to execute the script
@@ -133,6 +143,7 @@ function setUserDefaultSettings() {
                     // Add a trailing slash
                     pathPreferences = pathPreferences + path.sep;
                 }
+
                 userPreferences[settingsKeys[index - 1]] = [];
                 userPreferences[settingsKeys[index - 1]].push(pathPreferences);
 
@@ -183,41 +194,145 @@ function askUserInput(string, callback) {
 }
 
 function copyTemplate() {
-    var newProjectPath = userPreferences.path_to_new_project[0];
-    projectDestination = newProjectPath + scriptArguments.project[0];
-    projectTemplate    = pwd() + path.sep + 'template';
+    var projectPathPref = scriptArguments[1];
+    var newProjectPath  = userPreferences.path_to_new_project[0];
+    projectDestination  = newProjectPath + projectPathPref.project[0];
+    projectTemplate     = pwd() + path.sep + 'template';
+
+    // Save user input into scriptArguments
+    scriptArguments[4].browser = [];
+    scriptArguments[4].browser.push(userPreferences.path_to_browser[0]);
+    scriptArguments[5].projectPath = [];
+    scriptArguments[5].projectPath.push(userPreferences.path_to_new_project[0]);
 
     // Check if the project directory exists
     // Exit script if project exists
+    checkForProject(newProjectPath, projectPathPref, function() {
+        replaceTemplateMacro();
+    });
+}
+
+function checkForProject(newProjectPath, projectPathPref, callback) {
     if (!test('-d', projectDestination)) {
         cp('-R', projectTemplate, newProjectPath);
-        mv(newProjectPath + 'template', newProjectPath + scriptArguments.project[0]);
+        mv(newProjectPath + 'template', newProjectPath + projectPathPref.project[0]);
+        callback();
     } else {
-        echo('Project ' + scriptArguments.project[0] + ' already exists!');
+        echo('Project ' + projectPathPref.project[0] + ' already exists!');
         rl.close();
     }
-
-    replaceTemplateMacro();
 }
 
 function replaceTemplateMacro() {
-    for (var key in scriptArguments) {
-        echo(key);
-        echo(scriptArguments[key][0]);
-    }
-    // (( i=0; i<${#REPLACE_LIST[@]}; i=(i+2) ))
-    // do
-    //     FIND=${REPLACE_LIST[$i]};
-    //     REPLACE=${REPLACE_LIST[(i+1)]};
+    var fileArray = [];
+        dirArray = [];
 
-    //     # Rename directories
-    //     find "$PROJECT_DESTINATION" -type d \( -iname "*$FIND*" \) | xargs rename 's#'"$FIND"'#'"$REPLACE"'#g';
+    listCurrentDirectories(fileArray, dirArray);
 
-    //     # Rename in files
-    //     grep -Irl "$FIND" "$PROJECT_DESTINATION" | xargs sed -i "" 's#'"$FIND"'#'"$REPLACE"'#g';
+    renameInFiles(fileArray, function() {
+        renameDirectories(dirArray, 0, function() {
+            echo('DONE');
+        });
+    });
+}
 
-    //     # Rename files
-    //     find "$PROJECT_DESTINATION" -type f \( -iname "*$FIND*" \) | xargs rename 's#'"$FIND"'#'"$REPLACE"'#g';
-    // done
+function listCurrentDirectories(fileArray, dirArray) {
+    var listArray = [];
 
+    // Grab all the current files in the project destination
+    listArray = find(projectDestination);
+    listArray.forEach(function (v, i, arr) {
+        // Remove directories from the list
+        if (v.indexOf(".") != -1) {
+            fileArray.push(v);
+        } else {
+            dirArray.push(v);
+        }
+    });
+}
+
+function renameInFiles(fileArray, callback) {
+    var findStr,
+        replaceStr;
+
+    scriptArguments.forEach(function (val, index, array) {
+        for (var value in array[index]) {
+            findStr = defaultMacro[index][value];
+            replaceStr = array[index][value][0];
+            // Rename in files
+            fileArray.forEach(function (v, i, arr) {
+                rpl({
+                    regex: findStr,
+                    replacement: replaceStr,
+                    paths: [v],
+                    recursive: true,
+                    silent: true,
+                });
+            });
+        }
+        if (index >= scriptArguments.length - 1) {
+            callback();
+        };
+    });
+}
+
+function renameDirectories(dirArray, index, callback) {
+    var findStr = defaultMacro[index],
+        replaceStr = scriptArguments[index];
+
+    dirArray.forEach(function(val, i, arr) {
+        for (var key in findStr) {
+            if (val.indexOf(".") < 0) {
+                var myReg = new RegExp(findStr[key], "g");
+                var newstr = val.replace(myReg, replaceStr[key][0]);
+                if (newstr != val) {
+                    if (test('-d', val)) {
+                        fs.rename(val, newstr, function (err) {
+                            if (err) echo(err);
+                            echo('renamed complete');
+                        });
+                    }
+                }
+            }
+        }
+    });
+    // dirArray.forEach(function (v, i, a) {
+        // scriptArguments.forEach(function (val, index, array) {
+            // for (var value in array[index]) {
+                // findStr = defaultMacro[index][value];
+                // replaceStr = array[index][value][0];
+                // if (v.indexOf(findStr) > 0) {
+                //     var myReg = new RegExp(findStr, "g");
+                //     var newstr = v.replace(myReg, replaceStr);
+                //     echo(v)
+                //     echo(newstr)
+                // }
+            // }
+        // });
+    // });
+    // var listArray = [];
+    // dirArray.forEach(function (v, i, arr) {
+        // if (v.indexOf(findStr) > 0) {
+        //     var myReg = new RegExp(findStr, "g");
+        //     var newstr = v.replace(myReg, replaceStr);
+        //     var newDirNames = [];
+        // if (test('-d', '/d/api/src/com/__company_name__')) {
+
+        //     fs.rename('/d/api/src/com/__company_name__', '/d/api/src/com/pooo', function (err) {
+        //         if (err) throw err;
+        //         echo('renamed complete');
+        //         // callback();
+        //     });
+        // } 
+            // listArray = find(projectDestination);
+            // listArray.forEach(function (val, z, a) {
+            //     // Remove directories from the list
+            //     if (val.indexOf(".") < 0) {
+            //         echo('val: '+val);
+            //         newDirNames.push(val);
+            //     }
+            // });
+            // renameDirectories(newDirNames, findStr, replaceStr);
+        // } 
+    // });
 }
