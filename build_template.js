@@ -3,7 +3,7 @@ var shell     = require('shelljs/global'),
     readline  = require('readline'),
     fs        = require('fs'),
     path      = require('path'),
-    rpl   = require('replace');
+    rpl       = require('replace');
 
 var rl = readline.createInterface({
     input: process.stdin,
@@ -36,7 +36,8 @@ var scriptUsage =   "Usage: " + "company"   + "{" +   scriptArguments[0].company
 var userSettingsFile,
     projectDestination,
     projectTemplate,
-    previousMacro;
+    previousMacro,
+    dirRenamed = 0;
 
 var questionList    = [],
     macroList       = [],
@@ -203,7 +204,7 @@ function copyTemplate() {
     scriptArguments[4].browser = [];
     scriptArguments[4].browser.push(userPreferences.path_to_browser[0]);
     scriptArguments[5].projectPath = [];
-    scriptArguments[5].projectPath.push(userPreferences.path_to_new_project[0]);
+    scriptArguments[5].projectPath.push(projectDestination);
 
     // Check if the project directory exists
     // Exit script if project exists
@@ -230,7 +231,7 @@ function replaceTemplateMacro() {
     listCurrentDirectories(fileArray, dirArray);
 
     renameInFiles(fileArray, function() {
-        renameDirectories(dirArray, 0, function() {
+        renameDirectories(dirArray, 0, fileArray, function() {
             echo('DONE');
         });
     });
@@ -272,13 +273,15 @@ function renameInFiles(fileArray, callback) {
         }
         if (index >= scriptArguments.length - 1) {
             callback();
-        };
+        }
     });
 }
 
-function renameDirectories(dirArray, index, callback) {
+function renameDirectories(dirArray, index, fileArray, callback) {
     var findStr = defaultMacro[index],
         replaceStr = scriptArguments[index];
+
+    dirRenamed++;
 
     dirArray.forEach(function(val, i, arr) {
         for (var key in findStr) {
@@ -286,53 +289,43 @@ function renameDirectories(dirArray, index, callback) {
                 var myReg = new RegExp(findStr[key], "g");
                 var newstr = val.replace(myReg, replaceStr[key][0]);
                 if (newstr != val) {
-                    if (test('-d', val)) {
-                        fs.rename(val, newstr, function (err) {
-                            if (err) echo(err);
-                            echo('renamed complete');
+                    if ((test('-d', val) && (!test('-d', newstr)))) {
+                        renameFolder(val, newstr, function() {
+                            checkForRenamedDir(dirArray, fileArray, function(newDirArray) {
+                                if (canRename(newstr)) {
+                                    renameDirectories(newDirArray, dirRenamed, fileArray, callback);
+                                }
+                            });
                         });
                     }
                 }
             }
         }
     });
-    // dirArray.forEach(function (v, i, a) {
-        // scriptArguments.forEach(function (val, index, array) {
-            // for (var value in array[index]) {
-                // findStr = defaultMacro[index][value];
-                // replaceStr = array[index][value][0];
-                // if (v.indexOf(findStr) > 0) {
-                //     var myReg = new RegExp(findStr, "g");
-                //     var newstr = v.replace(myReg, replaceStr);
-                //     echo(v)
-                //     echo(newstr)
-                // }
-            // }
-        // });
-    // });
-    // var listArray = [];
-    // dirArray.forEach(function (v, i, arr) {
-        // if (v.indexOf(findStr) > 0) {
-        //     var myReg = new RegExp(findStr, "g");
-        //     var newstr = v.replace(myReg, replaceStr);
-        //     var newDirNames = [];
-        // if (test('-d', '/d/api/src/com/__company_name__')) {
+}
 
-        //     fs.rename('/d/api/src/com/__company_name__', '/d/api/src/com/pooo', function (err) {
-        //         if (err) throw err;
-        //         echo('renamed complete');
-        //         // callback();
-        //     });
-        // } 
-            // listArray = find(projectDestination);
-            // listArray.forEach(function (val, z, a) {
-            //     // Remove directories from the list
-            //     if (val.indexOf(".") < 0) {
-            //         echo('val: '+val);
-            //         newDirNames.push(val);
-            //     }
-            // });
-            // renameDirectories(newDirNames, findStr, replaceStr);
-        // } 
-    // });
+function canRename(newstr) {
+    // newstr to check if exists in path
+    echo(dirRenamed)
+    if (dirRenamed < 2) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function checkForRenamedDir(savedDir, fileArray, callback) {
+    dirArray = [];
+    listCurrentDirectories(fileArray, dirArray);
+    if (dirArray != savedDir) {
+        callback(dirArray);
+    }
+}
+
+function renameFolder(val, newstr, callback) {
+    fs.rename(val, newstr, function (err) {
+        if (err) echo(err);
+        echo('Renamed');
+        callback();
+    });
 }
